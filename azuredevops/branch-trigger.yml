@@ -1,0 +1,20 @@
+# AZDO Pipeline - Neil McAlister
+name: $(date:yyyyMMdd)$(rev:.r)-$(SourceBranchName)
+
+trigger:
+  branches:
+    include:
+      - release/thing1/*
+      
+variables:
+  azdoagentpool: 'ubuntu-latest'       
+
+- stage: Settings_Stage
+  displayName: 'Settings_Stage'
+  jobs:
+    - job: Settings_Job
+      pool:
+        vmImage: '$(azdoagentpool)'
+      steps:
+      - checkout: git://MY/MY_Scripts
+        path: MY_Scripts         
