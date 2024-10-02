@@ -1,0 +1,15 @@
+name: PRD-ReleaseStagesWorkflow
+
+on:
+  push:
+    branches:
+      - release/thing1/**
+
+jobs:
+  prd-job:
+    runs-on 'ubuntu-latest'
+    steps:
+    - name: 'Run Bash step for PRD'
+      run: |
+        echo "Hello PRD!"
+        
