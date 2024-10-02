@@ -1,5 +1,9 @@
 name: DEV-ReleaseStagesWorkflow
 
+# See here: https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow#triggering-a-workflow-from-a-workflow
+# and here: https://github.com/orgs/community/discussions/140267
+# for why the process needs a PAT token - whereas Azure DevOps Pipelines do not!
+
 on:
   push:
     branches:
@@ -18,4 +22,29 @@ jobs:
     - name: 'Run Bash Step for DEV'
       run: |
         echo "Hello DEV!"
+        
+  create-release-branch:
+    runs-on: ubuntu-latest
+    needs: dev-job
+    environment: sandbox-prd
+    steps:
+    - name: 'Checkout Repo'
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        token: ${{ secrets.NEIL_MCALISTER_PAT }}
+    - name: 'Create branch for Production use'
+      env:
+        GITHUB_PAT: ${{ secrets.NEIL_MCALISTER_PAT }}
+      run: | 
+        git checkout $BRANCH_TO_RELEASE
+        FullCommitID=$(git rev-parse HARD)
+        echo 'What is the full CommitID ?'
+        echo $FullCommitID
+        NewRelease=${FullCommitID:0:8}
+        echo 'What is the abv release number to 8 chars ?'
+        echo $NewRelease
+        git branch $RELEASE_BRANCH_PREFIX/$NewRelease $FullCommitID
+        git checkout $RELEASE_BRANCH_PREFIX/$NewRelease
+        git push https://$GITHUB_PAT@github.com/neilmcalister/bitsnpieces.git $RELEASE_BRANCH_PREFIX/$NewRelease
         
