@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - .github/workflows/release-stages-dev-.yml
+      - .github/workflows/release-stages-dev.yml
 
 env:
   BRANCH_TO_RELEASE: 'main'
