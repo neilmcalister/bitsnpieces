@@ -40,7 +40,7 @@ jobs:
         GITHUB_PAT: ${{ secrets.NEIL_MCALISTER_PAT }}
       run: | 
         git checkout $BRANCH_TO_RELEASE
-        FullCommitID=$(git rev-parse HARD)
+        FullCommitID=$(git rev-parse HEAD)
         echo 'What is the full CommitID ?'
         echo $FullCommitID
         NewRelease=${FullCommitID:0:8}
