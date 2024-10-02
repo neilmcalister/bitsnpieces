@@ -4,7 +4,7 @@ name: DEV-ReleaseStagesWorkflow
 # and here: https://github.com/orgs/community/discussions/140267
 # for why the process needs a PAT token - whereas Azure DevOps Pipelines do not!
 
-# PAT TOKEN (classic) requires WORKFLOW box ticked (which enables Repos too)
+# PAT TOKEN (classic) requires WORKFLOW box ticked (which enables Repos too) 
 
 on:
   push:
