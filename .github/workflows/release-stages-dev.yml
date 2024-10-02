@@ -1,0 +1,21 @@
+name: DEV-ReleaseStagesWorkflow
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/release-stages-dev-.yml
+
+env:
+  BRANCH_TO_RELEASE: 'main'
+  RELEASE_BRANCH_PREFIX: 'release/thing1'
+
+jobs:
+  dev-job
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Run Bash Step for DEV'
+      run: |
+        echo "Hello DEV!"
+        
