@@ -3,7 +3,7 @@ name: DEV-ReleaseStagesWorkflow
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - .github/workflows/release-stages-dev-.yml
 
