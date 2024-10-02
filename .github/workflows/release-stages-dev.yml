@@ -12,7 +12,7 @@ env:
   RELEASE_BRANCH_PREFIX: 'release/thing1'
 
 jobs:
-  dev-job
+  dev-job:
     runs-on: ubuntu-latest
     steps:
     - name: 'Run Bash Step for DEV'
